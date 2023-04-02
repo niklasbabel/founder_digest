@@ -3,9 +3,9 @@
     <div class="flex items-center flex-no-shrink text-white mr-6">
       <% logo_path = current_user ? dashboard_index_path : root_path %>
       <%= link_to logo_path do %>
-        <%= image_tag "avatar.png",  style: "max-height: 42px" %>
+        <%= image_tag "logo.png",  style: "max-height: 35px" %>
       <% end %>
-      <span class="font-semibold text-xl tracking-tight"><%= ENV['COMPANY_NAME'] %></span>
+      <span class="font-semibold text-xl tracking-tight"><%= ENV['company_name'] %></span>
     </div>
     <div class="block sm:hidden">
       <button class="navbar-burger flex items-center px-3 py-2 border rounded text-white border-white hover:text-white hover:border-white" data-action="click->header#toggleMobileNav">
@@ -18,20 +18,15 @@
     <div id="main-nav" class="w-full flex-grow sm:flex text-right sm:w-auto hidden" data-header-target="mainNav">
       <div class="text-sm sm:flex-grow">
         <% nav_link_classes = 'ml-8 whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-900' %>
-        <% if current_user %>
-          <%= link_to 'Admin', admin_dashboard_index_path, class: nav_link_classes if current_user.admin? %>
-          <%= link_to 'Dashboard', dashboard_index_path, class: nav_link_classes %>
-          <%= link_to 'Account', account_index_path, class: nav_link_classes %>
-          <%= link_to 'Logout', logout_path, class: nav_link_classes %>
-        <% else %>
-          <%= link_to 'Contact', '#', target: '_blank', class: nav_link_classes  %>
-          <%= link_to 'Login', new_user_session_path, class: nav_link_classes %>
-          <%= link_to 'Signup', new_user_registration_path, class: 'ml-8 whitespace-nowrap text-base font-medium inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700' %>
-        <% end %>
+        <%# TODO: ensure only admin can see Admin link! %>
+        <a class="<%= nav_link_classes %>" href="/admin">Admin</a>
+        <a class="<%= nav_link_classes %>" href="/dashboard">Dashboard</a>
+        <a class="<%= nav_link_classes %>" href="/logout">Logout</a>
       </div>
     </div>
   </nav>
 </header>
+
 
 <!-- smooth scroll nav links -->
 <script type="text/javascript">
